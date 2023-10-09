@@ -4,11 +4,206 @@
   
   
   <entry>
-    <title>Hello World</title>
-    <link href="/2023/09/21/hello-world/"/>
-    <url>/2023/09/21/hello-world/</url>
+    <title></title>
+    <link href="/2023/10/09/%E6%9D%82/vscode%E5%BF%AB%E6%8D%B7/"/>
+    <url>/2023/10/09/%E6%9D%82/vscode%E5%BF%AB%E6%8D%B7/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>返回上一个位置</p><ul><li><strong>Windows</strong>: <code>Alt</code> + <code>←</code> ;或者 鼠标侧键</li><li><strong>Linux</strong>: <code>Ctrl</code> + <code>Alt</code> + <code>-</code> ;貌似数字键盘的减号没效果</li><li><strong>Mac</strong>: <code>Ctrl</code> + <code>-</code></li></ul>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/10/08/pytorch&amp;python/python/"/>
+    <url>/2023/10/08/pytorch&amp;python/python/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/xiaochongc/p/14500619.html">https://www.cnblogs.com/xiaochongc/p/14500619.html</a> </p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/10/08/%E8%AF%BB%E8%AE%BA%E6%96%87/%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
+    <url>/2023/10/08/%E8%AF%BB%E8%AE%BA%E6%96%87/%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h2 id="KV-cache"><a href="#KV-cache" class="headerlink" title="KV cache"></a>KV cache</h2><p>key和value都是啥</p><pre><code class="python">query = self._split_heads(query, self.num_heads, self.head_dim)key = self._split_heads(key, self.num_heads, self.head_dim)value = self._split_heads(value, self.num_heads, self.head_dim)if layer_past is not None: # 当输出第一个token后，layer_past就是非None了    past_key, past_value = layer_past # 取出之前计算好的 key, value    key = torch.cat((past_key, key), dim=-2) # past_key 与当前 token 对应的 key 拼接    value = torch.cat((past_value, value), dim=-2) # past_value 与当前 token 对应的 value 拼接if use_cache is True:    present = (key, value)else:    present = None</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/10/07/cuda/%E4%B8%80%E4%BA%9B%E7%94%A8%E6%B3%95/"/>
+    <url>/2023/10/07/cuda/%E4%B8%80%E4%BA%9B%E7%94%A8%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h2 id="CUDA-streams"><a href="#CUDA-streams" class="headerlink" title="CUDA streams"></a>CUDA streams</h2><ol><li><strong>数据拷贝和数值计算可以同时进行</strong>。</li><li><strong>两个方向的拷贝可以同时进行（GPU到CPU，和CPU到GPU）</strong>，数据如同行驶在双向快车道。</li></ol><p>但同时，这数据和计算的并行也有一点合乎逻辑的限制：<strong>进行数值计算的kernel不能读写正在被拷贝的数据</strong>。</p><ol><li>将数据拆分称许多块，每一块交给一个Stream来处理。</li><li>每一个Stream包含了三个步骤：1）将属于该Stream的数据从CPU内存转移到GPU内存，2）GPU进行运算并将结果保存在GPU内存，3）将该Stream的结果从GPU内存拷贝到CPU内存。</li><li>所有的Stream被同时启动，由GPU的scheduler决定如何并行。<br>![[Pasted image 20231007154240.png]]<br>就像这样，如果不开的话，就是只有一个stream，先copy到GPU再算，再copy回CPU</li></ol>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/28/%E7%8E%B0%E5%9C%A8%E5%9C%A8%E5%81%9A%E7%9A%84/%E5%8A%A8%E6%80%81/"/>
+    <url>/2023/09/28/%E7%8E%B0%E5%9C%A8%E5%9C%A8%E5%81%9A%E7%9A%84/%E5%8A%A8%E6%80%81/</url>
+    
+    <content type="html"><![CDATA[<p>是不是就是设定一个显存的目标，比如只想最多用xG显存。然后每次要换阶段的时候，看一下如果放新的模型进来会不会超显存，不会的话就不把当前的换出去，只把新的放进来。或者只需要换一部分出去。</p><ul><li><input disabled="" type="checkbox"> 是啥时候决定要怎么部署模型的，怎么看出来pp和tp的</li><li><input disabled="" type="checkbox"> 这里算出来这么多GPU要用哪个比较好</li></ul>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/28/%E8%AF%BB%E8%AE%BA%E6%96%87/lora/"/>
+    <url>/2023/09/28/%E8%AF%BB%E8%AE%BA%E6%96%87/lora/</url>
+    
+    <content type="html"><![CDATA[<p>![[Pasted image 20230928154625.png]]</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/27/%E8%AF%BB%E8%AE%BA%E6%96%87/GPT/"/>
+    <url>/2023/09/27/%E8%AF%BB%E8%AE%BA%E6%96%87/GPT/</url>
+    
+    <content type="html"><![CDATA[<p>参考：<br><a href="https://jalammar.github.io/illustrated-gpt2/">https://jalammar.github.io/illustrated-gpt2/</a><br><a href="https://jaykmody.com/blog/gpt-from-scratch/">60行代码构建gpt</a><br><a href="https://jiqihumanr.github.io/2023/04/13/gpt-from-scratch/">https://jiqihumanr.github.io/2023/04/13/gpt-from-scratch/</a><br><a href="https://developers.google.com/machine-learning/glossary?hl=zh-cn#logits">机器学习术语表</a><br><a href="https://jalammar.github.io/illustrated-gpt2/">https://jalammar.github.io/illustrated-gpt2/</a></p><p>咱只看decoder<br>定义一下参数：</p><ul><li>hidden size: 每个词的embedding的维度</li><li>seq len<br>和一些常用的英文表示：</li><li>wte: 词向量嵌入矩阵， shape为<code>[n_vocab, n_emdb] </code></li><li>wpe: 位置嵌入，<code>[n_ctx, n_emdb] </code><br>input是<code>[n_seq, n_embd]</code><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">x = wte<span class="hljs-comment">[inputs]</span> + wpe<span class="hljs-comment">[range(len(inputs))]</span>  # <span class="hljs-comment">[n_seq]</span> -&gt; <span class="hljs-comment">[n_seq, n_embd]</span><br></code></pre></td></tr></table></figure>logits:可以理解logits ——【batch_size，class__num】是未进入softmax的概率，一般是全连接层的输出，softmax的输入</li></ul><h2 id="到底有哪些层"><a href="#到底有哪些层" class="headerlink" title="到底有哪些层"></a>到底有哪些层</h2><p>![[Pasted image 20230927144307.png]]</p><h3 id="embedding"><a href="#embedding" class="headerlink" title="embedding"></a>embedding</h3><ol><li>就是上述的wte和wpe</li></ol><h3 id="transformer-layer"><a href="#transformer-layer" class="headerlink" title="transformer layer"></a>transformer layer</h3><p>![[Pasted image 20230927141646.png]]</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot; 代码转载自https://jiqihumanr.github.io/2023/04/13/gpt-from-scratch/</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">transformer_block</span>(<span class="hljs-params">x, mlp, attn, ln_1, ln_2, n_head</span>):  <span class="hljs-comment"># [n_seq, n_embd] -&gt; [n_seq, n_embd]  </span><br>    <span class="hljs-comment"># multi-head causal self attention  </span><br>    x = x + mha(layer_norm(x, **ln_1), **attn, n_head=n_head)  <span class="hljs-comment"># [n_seq, n_embd] -&gt; [n_seq, n_embd]  </span><br>  <br>    <span class="hljs-comment"># position-wise feed forward network  </span><br>    x = x + ffn(layer_norm(x, **ln_2), **mlp)  <span class="hljs-comment"># [n_seq, n_embd] -&gt; [n_seq, n_embd]  </span><br>  <br>    <span class="hljs-keyword">return</span> x<br><br></code></pre></td></tr></table></figure><p>注意点：</p><ol><li>multi-head attention: 建模输入之间的关系。除此之外，别的都是对单一token进行的，不会看到彼此。</li><li>ffn只是为了给模型增加可学习的参数</li><li>预归一化：x + sublayer(layer_norm(x))</li></ol><p>对于transformer layer:</p><p>什么是自注意力：qkv来自同一个来源，就是自注意力<br>注意这个mask</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">attention</span>(<span class="hljs-params">q, k, v, mask</span>):  <span class="hljs-comment"># [n_q, d_k], [n_k, d_k], [n_k, d_v], [n_q, n_k] -&gt; [n_q, d_v]  </span><br>    <span class="hljs-keyword">return</span> softmax(q @ k.T / np.sqrt(q.shape[-<span class="hljs-number">1</span>]) + mask) @ v  <br>  <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">causal_self_attention</span>(<span class="hljs-params">x, c_attn, c_proj</span>): <span class="hljs-comment"># [n_seq, n_embd] -&gt; [n_seq, n_embd]  </span><br>    <span class="hljs-comment"># qkv projections  </span><br>    x = linear(x, **c_attn) <span class="hljs-comment"># [n_seq, n_embd] -&gt; [n_seq, 3*n_embd]  </span><br>  <br>    <span class="hljs-comment"># split into qkv  </span><br>    q, k, v = np.split(x, <span class="hljs-number">3</span>, axis=-<span class="hljs-number">1</span>) <span class="hljs-comment"># [n_seq, 3*n_embd] -&gt; 3 of [n_seq, n_embd]  </span><br>  <br>    <span class="hljs-comment"># causal mask to hide future inputs from being attended to  </span><br>    causal_mask = (<span class="hljs-number">1</span> - np.tri(x.shape[<span class="hljs-number">0</span>]), dtype=x.dtype) * -<span class="hljs-number">1e10</span>  <span class="hljs-comment"># [n_seq, n_seq]  </span><br>  <br>    <span class="hljs-comment"># perform causal self attention  </span><br>    x = attention(q, k, v, causal_mask) <span class="hljs-comment"># [n_seq, n_embd] -&gt; [n_seq, n_embd]  </span><br>  <br>    <span class="hljs-comment"># out projection  </span><br>    x = linear(x, **c_proj) <span class="hljs-comment"># [n_seq, n_embd] @ [n_embd, n_embd] = [n_seq, n_embd]  </span><br>  <br>    <span class="hljs-keyword">return</span> x<br></code></pre></td></tr></table></figure><p>层归一化</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/pytorch&amp;python/to/"/>
+    <url>/2023/09/26/pytorch&amp;python/to/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/%E8%AF%BB%E8%AE%BA%E6%96%87/paper/"/>
+    <url>/2023/09/26/%E8%AF%BB%E8%AE%BA%E6%96%87/paper/</url>
+    
+    <content type="html"><![CDATA[<ul><li><input disabled="" type="checkbox"> <a href="https://sites.google.com/view/medusa-llm">https://sites.google.com/view/medusa-llm</a></li><li><input disabled="" type="checkbox"> flash attention</li></ul>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/cuda/cuda%E6%95%99%E7%A8%8B/"/>
+    <url>/2023/09/26/cuda/cuda%E6%95%99%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/34587739">https://zhuanlan.zhihu.com/p/34587739</a><br>![[Pasted image 20230926155258.png]]<br>gpu上的线程是轻量级的？<br>host是cpu<br>device是gpu</p><ol><li>分配host内存，并进行数据初始化；</li><li>分配device内存，并从host将数据拷贝到device上；</li><li>调用CUDA的核函数在device上完成指定的运算；</li><li>将device上的运算结果拷贝到host上；</li><li>释放device和host上分配的内存。</li></ol><p>![[Pasted image 20230926160951.png]]<br>。当线程块被划分到某个SM上时，它将进一步划分为多个线程束，因为这才是SM的基本执行单元，但是一个SM同时并发的线程束数是有限的。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/%E4%B8%80%E4%BA%9B%E6%A1%86%E6%9E%B6%E5%92%8C%E6%A8%A1%E5%9E%8B/medusa/"/>
+    <url>/2023/09/26/%E4%B8%80%E4%BA%9B%E6%A1%86%E6%9E%B6%E5%92%8C%E6%A8%A1%E5%9E%8B/medusa/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/%E8%AF%BB%E8%AE%BA%E6%96%87/Flexgen/"/>
+    <url>/2023/09/26/%E8%AF%BB%E8%AE%BA%E6%96%87/Flexgen/</url>
+    
+    <content type="html"><![CDATA[<h2 id="稀疏注意力"><a href="#稀疏注意力" class="headerlink" title="稀疏注意力"></a>稀疏注意力</h2><p>aaaa</p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>GPT-175B需要325GB来load model weights，需要5张A100(80GB)<br>This paaper focus <strong>throughput-oriented genrative inference.</strong><br>使用场景：back-of-house task, less sensitive to latency<br>所以在这样的场景下可以<strong>牺牲一点latency，实现更高的throughput。</strong><br>在此之前，主要有三种方法：model compression，collaborative inference，offloading.<br>前两种方法是认为model可以放进单个GPU<br>offloading,因为有IO scheduling和tensor placement的开销，offloading在单GPU上的表现比较差。因为GPU的显存有限，所以small batch size是offloading的瓶颈。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ad-important">**设计一个高效的单GPU offloading strategies for high-throughput generative inference**<br></code></pre></td></tr></table></figure><p>![[Pasted image 20231006193844.png]]<br>challenge：</p><ul><li>有效offloading strategy的设计。需要设计一个策略来决定把weights，activation，key-value cache放到哪里（three-level memory hierarchy)，放哪些，什么时候offleading。<ul><li>计算过程中有比较复杂的dependency graph。offloading strategy有比较大的设计空间。</li><li>以前的方法远远没到硬件的limit</li></ul></li><li>compression strategies。之前的工作在压缩weights和activation方面已经有promising results。但是在高通量推理的场景，KV cache和weights的IO costs和memory reduction变得更加的重要。</li></ul><p>contribution：</p><ul><li>define a search space of possible offloading strategies by considering computation schedule, tensor placement, and computation delegation.</li><li>compress both weights and KV cache for LLM to 4 bits without retraining or calibration, all with negligible accuracy loss.</li><li>效果好</li></ul><h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><p>使用kv cache的Generative Inference分成两个阶段：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ad-note">1. the prefill stage which takes a prompt sequence to generate the key-value cache (KV cache) for each transformer layer of the LLM;(生成第一个token的时候)<br>2. the decoding stage which utilizes and updates the KV cache to generate tokens step-by-step, where the current token generation depends on previously generated tokens<br>（之后）<br></code></pre></td></tr></table></figure><h2 id="offloading-strategy"><a href="#offloading-strategy" class="headerlink" title="offloading strategy"></a>offloading strategy</h2><h3 id="search-space"><a href="#search-space" class="headerlink" title="search space"></a>search space</h3><h4 id="Compute-schedule"><a href="#Compute-schedule" class="headerlink" title="Compute schedule"></a>Compute schedule</h4><p>![[Pasted image 20231007104051.png]]<br>之前为了让每个token产生的更快，所以是row-by-row。但是其实向量的squares之间并不共享weight，需要重复的load weights，导致IO开销较大。<br>但是同一column的square share weights，如果竖着load，每次就不用重新load weights，减小开销。<br>我们也不能一直traverse 所有的batch，因为activation和KV cache可能会占满内存。所以设定一个block大小，当kv cache activations以及weight<br>![[Pasted image 20231008112703.png]]</p><h4 id="overlapping"><a href="#overlapping" class="headerlink" title="overlapping"></a>overlapping</h4><p>![[Pasted image 20231007105311.png]]<br>第三层for循环中的六个函数可以并行。</p><p>“The product of the GPU batch size and the number of GPU batches is called block size (or effective batch size)” (Sheng 等, p. 5)</p><h4 id="tensor-placement"><a href="#tensor-placement" class="headerlink" title="tensor placement"></a><strong>tensor placement</strong></h4><p>notation:</p><ul><li><em>wg</em>,<em>wc</em>,<em>wd</em> : to define the percentages of weights to stored on GPU, CPU, and disk.</li><li><em>hg</em>,<em>hc</em>,<em>hd</em>: define the percentages of activations</li><li><em>cg, cc, cd</em> for KV cache<br>有多种放置的粒度：model，layer，tensor granularity. 粗粒度时间开销少（计算开销吗），但是更不灵活。<br>weights: layer granularity<br>activations and KV cache: tensor</li></ul><h4 id="Computation-delegation"><a href="#Computation-delegation" class="headerlink" title="Computation delegation"></a><strong>Computation delegation</strong></h4><p>用CPU计算也有帮助。<br>“This is because the computation of attention scores during decoding is I&#x2F;O-bounded” (Sheng 等, p. 5) ？？<br>如果在GPU上计算：需要移动kv cache($b\times s \times h_1 \times 4$)<br>如果在CPU上计算：需要移动activation($b\times h_1\times 4$)这更不知道是咋算的</p><h3 id="cost-model-and-policy-search"><a href="#cost-model-and-policy-search" class="headerlink" title="cost model and policy search"></a>cost model and policy search</h3><h4 id="cost-model"><a href="#cost-model" class="headerlink" title="cost model"></a>cost model</h4><p>预测在prefill和decode两个阶段的latency<br>$$T &#x3D; T_{pre}\cdot l + T_{gen}\cdot (n-1) \cdot l $$<br>l: num of layers, n: number of tokens</p><p>T的计算：<br>![[Pasted image 20231008103625.png]]<br>T_gen &#x3D; ![[Pasted image 20231008103639.png]]</p><p>对于这些ctog等的计算：把各种I&#x2F;O花费的时间加起来就可以。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ad-example">比如$dto^g$<br>+ size of FP16 weights: $8h_1^2+4h_1h_2$ ($w_o,w_k,w_q,w_v \rightarrow 4h_1^2\cdot 2$，MLP: $h1h2\cdot 2\cdot 2$)<br>+ activation: 2 bls h1<br>+ KV cache:$4\cdot bls\cdot (s+\frac&#123;n&#125;&#123;2&#125;)\cdot h_1$ ($bls\cdot h1\cdot(s+s+1+...+s+n)\cdot 2$)<br>然后乘上各自的百分比<br><br>![[Pasted image 20231007145325.png]]<br></code></pre></td></tr></table></figure><h4 id="policy-search"><a href="#policy-search" class="headerlink" title="policy search"></a><strong>policy search</strong></h4><p>11 variables:</p><ul><li>block size <em>bls</em></li><li>GPU batch size <em>gbs</em></li><li>weight placement <em>wg, wc, wd</em></li><li>activation placement <em>hg, hc, hd</em></li><li>KV cache placement <em>cg, cc, cd.</em><br>这些percentage是0-1的实数</li></ul><ol><li>确定GPU batch size和block size。GPU batch size是4的倍数，bls是比20小。所以没有很多的选择。</li><li>用线性规划求解剩余的<ol><li>![[Pasted image 20231007145855.png]]</li><li>规划目标是bls&#x2F;T最大，即T&#x2F;bls最小，对peak memory有约束，以及同一placement percentage和为1</li></ol></li></ol><h3 id="Extension-to-multiple-GPUs"><a href="#Extension-to-multiple-GPUs" class="headerlink" title="Extension to multiple GPUs"></a>Extension to multiple GPUs</h3><p>有更多GPU可以用model parallelism<br>model parallelism can be utilized to reduce the memory pressure of each GPU, which can potentially lead to a super-linear scaling in decoding.</p><p>两种model parallelism：</p><ul><li>tensor： 可以reduce single-query latency</li><li>pipeline：achieve good scaling on throughput??<br>m张卡<br>running an n&#x2F;m- layer transformer on one GPU</li></ul><h2 id="5-近似方法"><a href="#5-近似方法" class="headerlink" title="5 近似方法"></a>5 近似方法</h2><h3 id="Group-wise-quantization"><a href="#Group-wise-quantization" class="headerlink" title="Group-wise quantization"></a>Group-wise quantization</h3><p>可以把OPT-175B的weights和KV cache量化成<br>we can choose a fine-grained quantization format in favor of a high compression ratio and dequantize the tensors back to FP16 before computation.<br>Given a tensor, we choose g contiguous elements along a certain dimension as a group. For each group, we compute the min and max of the group elements and quantize each element x into b-bit integers by<br>![[Pasted image 20231007152405.png]]<br>dimension的选择：</p><p>在CPU上计算开销大，当使用CPU delegation的时候就不用这个</p><h3 id="Sparse-Attention"><a href="#Sparse-Attention" class="headerlink" title="Sparse Attention"></a>Sparse Attention</h3><p>选择top-K</p><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>带宽大</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/slurm/"/>
+    <url>/2023/09/26/slurm/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/pytorch&amp;python/checkpoint/"/>
+    <url>/2023/09/26/pytorch&amp;python/checkpoint/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/26/%E4%B8%80%E4%BA%9B%E6%A1%86%E6%9E%B6%E5%92%8C%E6%A8%A1%E5%9E%8B/deepspeed%E5%92%8Ccolossal%20ai/"/>
+    <url>/2023/09/26/%E4%B8%80%E4%BA%9B%E6%A1%86%E6%9E%B6%E5%92%8C%E6%A8%A1%E5%9E%8B/deepspeed%E5%92%8Ccolossal%20ai/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2023/09/25/pytorch&amp;python/backward/"/>
+    <url>/2023/09/25/pytorch&amp;python/backward/</url>
+    
+    <content type="html"><![CDATA[<p>nn.module.backward<br>和loss.backward，nn.module.backward根本没用</p><figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stan">python3<br><span class="hljs-title">model</span>.train()                    <span class="hljs-comment"># 开启训练模式，让 dropout，bn 等生效</span><br>outputs = <span class="hljs-title">model</span>.forward(input)   <span class="hljs-comment"># 前向传播</span><br>loss = loss_func(outputs,<span class="hljs-built_in">target</span>) <span class="hljs-comment"># 计算损失</span><br>optimizer.zero_grad()            <span class="hljs-comment"># 清空之前存储的梯度</span><br>loss.backward()                  <span class="hljs-comment"># 反向传播计算梯度并存储，默认 loss.backward(gradient = loss)</span><br>optimizer.<span class="hljs-built_in">step</span>()     <br><br></code></pre></td></tr></table></figure><h2 id="自动微分"><a href="#自动微分" class="headerlink" title="自动微分"></a>自动微分</h2><p>gpu</p><h2 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h2>]]></content>
     
     
     
